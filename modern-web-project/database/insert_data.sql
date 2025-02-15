@@ -23,7 +23,7 @@ INSERT INTO GolfCourses (name) VALUES ('Pebble Beach');
 INSERT INTO GolfCourses (name) VALUES ('Gisborne Golf Club');
 INSERT INTO GolfCourses (name) VALUES ('St. Andrews');
 
--- Insert data into Holes for Augusta National
+-- Data for Augusta National
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 1, 11, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 2, 9, 5);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 3, 13, 4);
@@ -44,7 +44,7 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 17, 18, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 18, 4, 4);
 
 
--- Insert data into Holes for Pebble Beach
+-- Data for Pebble Beach
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 1, 4, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 2, 12, 5);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 3, 16, 4);
@@ -65,7 +65,7 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 17, 13, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 18, 17, 5);
 
 
--- Insert data into Holes for Gisborne Golf Club
+-- Data for Gisborne Golf Club
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 1, 16, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 2, 10, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 3, 8, 5);
@@ -85,6 +85,7 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 16, 15, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 17, 7, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 18, 13, 4);
 
+-- Data for St. Andrews
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 1, 10, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 2, 14, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 3, 12, 4);
