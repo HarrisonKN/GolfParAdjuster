@@ -1,0 +1,16 @@
+.options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.options button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.options p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #555;
+}
