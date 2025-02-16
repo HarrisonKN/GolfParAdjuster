@@ -41,7 +41,7 @@ app.get('/api/golf-course-suggestions', async (req, res) => {
     console.log(`Received query: ${query}`); // Log the received query
     try {
         const result = await pool.query(
-            `SELECT name FROM GolfCourses WHERE name LIKE ?`,
+            `SELECT name FROM GolfCourses WHERE name LIKE $1`,
             [`%${query}%`]
         );
         console.log(`Query result: ${JSON.stringify(result.rows)}`); // Log the query result
