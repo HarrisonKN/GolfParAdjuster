@@ -22,6 +22,7 @@ INSERT INTO GolfCourses (name) VALUES ('Augusta National');
 INSERT INTO GolfCourses (name) VALUES ('Pebble Beach');
 INSERT INTO GolfCourses (name) VALUES ('Gisborne Golf Club');
 INSERT INTO GolfCourses (name) VALUES ('St. Andrews');
+INSERT INTO GolfCourses (name) VALUES ('Keilor Golf Club');
 
 -- Data for Augusta National
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 1, 11, 4);
@@ -102,3 +103,23 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 15, 15, 5);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 16, 11, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 17, 5, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (4, 18, 3, 4);
+
+-- Data for Keilor Golf Club
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 1, 11, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 2, 18, 3);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 3, 9, 5);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 4, 5, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 5, 13, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 6, 15, 3);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 7, 1, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 8, 3, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 9, 7, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 10, 2, 5);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 11, 8, 3);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 12, 4, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 13, 10, 3);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 14, 12, 3);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 15, 14, 5);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 16, 16, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 17, 17, 4);
+INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (5, 18, 6, 4);
