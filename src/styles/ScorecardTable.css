@@ -1,29 +1,26 @@
-.table {
-    width: 90%;
+/* General styles for the scorecard table */
+table {
+    width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
 }
 
-.table th, .table td {
+th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
 }
 
-.table th {
+th {
     background-color: #f2f2f2;
-    font-weight: bold;
 }
 
-.table tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    table {
+        font-size: 12px;
+    }
 
-.table tr:hover {
-    background-color: #f1f1f1;
-}
-
-.table .hole-header {
-    font-weight: bold;
-    background-color: #e0e0e0;
+    th, td {
+        padding: 4px;
+    }
 }

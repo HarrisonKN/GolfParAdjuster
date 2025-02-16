@@ -1,27 +1,28 @@
+/* General styles for the header */
 .header {
-    background-color: #4CAF50; /* Green background */
-    color: white; /* White text */
-    padding: 15px; /* Padding around the header */
-    text-align: center; /* Centered text */
-    font-size: 24px; /* Larger font size */
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
 }
 
-.nav {
-    display: flex; /* Flexbox for navigation items */
-    justify-content: center; /* Center navigation items */
-    list-style-type: none; /* Remove bullet points */
-    padding: 0; /* Remove default padding */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.nav li {
-    margin: 0 15px; /* Spacing between navigation items */
+.logo {
+    font-size: 24px;
 }
 
-.nav a {
-    color: white; /* White text for links */
-    text-decoration: none; /* Remove underline from links */
-}
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+    }
 
-.nav a:hover {
-    text-decoration: underline; /* Underline on hover */
+    .logo {
+        font-size: 20px;
+    }
 }
