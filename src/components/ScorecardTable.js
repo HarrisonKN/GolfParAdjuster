@@ -44,11 +44,11 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
                     {holeNumbers.map((holeNumber, index) => (
                         <React.Fragment key={`hcp-${holeNumber}`}>
                             <td>{holes[index] ? holes[index].hcp : ''}</td>
-                            {index === 8 && <td>{holes.length > 0 ? sumHoles1to9 : ''}</td>}
+                            {index === 8 && <td>{''}</td>}
                         </React.Fragment>
                     ))}
-                    <td>{holes.length > 9 ? sumHoles10to18 : ''}</td>
-                    <td>{holes.length > 0 ? totalPar : ''}</td>
+                    <td>{''}</td>
+                    <td>{''}</td>
                 </tr>
                 <tr>
                     <td>{rowTitles[2]}</td>
