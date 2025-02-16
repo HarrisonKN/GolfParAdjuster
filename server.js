@@ -41,13 +41,14 @@ app.get('/api/golf-course-suggestions', async (req, res) => {
     console.log(`Received query: ${query}`); // Log the received query
     try {
         const result = await pool.query(
-            `SELECT name FROM GolfCourses WHERE name LIKE $1`,
+            `SELECT name FROM GolfCourses WHERE name ILIKE $1`, // Use ILIKE for case-insensitive search
             [`%${query}%`]
         );
         console.log(`Query result: ${JSON.stringify(result.rows)}`); // Log the query result
         res.json({ suggestions: result.rows.map(row => row.name) });
     } catch (err) {
-        console.error(`Error: ${err.message}`); // Log the error
+        console.error(`Error executing query: ${err.message}`); // Log the error
+        console.error(`Stack trace: ${err.stack}`); // Log the stack trace
         res.status(500).json({ error: err.message });
     }
 });
