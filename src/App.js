@@ -10,7 +10,7 @@ const App = () => {
     const [par99Applied, setPar99Applied] = useState(false);
 
     const handleSearch = (courseName) => {
-        fetch(`http://localhost:3001/api/golf-course?name=${courseName}`)
+        fetch(`https://golfparadjuster.onrender.com/api/golf-course?name=${courseName}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

@@ -7,6 +7,7 @@ body {
 
 .App {
     text-align: center;
+    padding: 20px;
 }
 
 header {
@@ -14,11 +15,28 @@ header {
     color: white;
     padding: 1rem;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .search-bar {
     margin: 1rem auto;
     text-align: center;
+}
+
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+}
+
+.table-container table {
+    width: 100%;
+    min-width: 600px; /* Adjust this value based on your table's minimum width */
+}
+
+.options-container {
+    padding: 20px;
 }
 
 table {
@@ -38,4 +56,31 @@ th, td {
 th {
     background-color: #4CAF50;
     color: white;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 600px) {
+    .App {
+        padding: 10px;
+    }
+
+    header {
+        padding: 0.5rem;
+    }
+
+    .search-bar {
+        margin: 0.5rem auto;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        padding: 4px;
+    }
+
+    .options-container {
+        padding: 10px;
+    }
 }
