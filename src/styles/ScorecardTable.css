@@ -1,4 +1,9 @@
 /* General styles for the scorecard table */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
