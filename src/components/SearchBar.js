@@ -10,7 +10,7 @@ const SearchBar = ({ onSearch }) => {
         setQuery(value);
 
         if (value.length > 1) {
-            fetch(`http://localhost:3001/api/golf-course-suggestions?q=${value}`)
+            fetch(`https://golfparadjuster.onrender.com/api/golf-course-suggestions?q=${value}`)
                 .then(response => response.json())
                 .then(data => setSuggestions(data.suggestions))
                 .catch(error => console.error('Error fetching suggestions:', error));
