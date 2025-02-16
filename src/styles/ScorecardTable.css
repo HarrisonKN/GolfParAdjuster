@@ -14,6 +14,15 @@ th {
     background-color: #f2f2f2;
 }
 
+/* Alternating row colors */
+tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e9e9e9;
+}
+
 /* Responsive styles for mobile devices */
 @media (max-width: 600px) {
     table {
