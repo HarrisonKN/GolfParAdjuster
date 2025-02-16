@@ -4,12 +4,12 @@ DROP TABLE IF EXISTS GolfCourses;
 
 -- Create tables
 CREATE TABLE GolfCourses (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Holes (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     course_id INTEGER,
     hole_number INTEGER,
     hcp INTEGER,
@@ -43,7 +43,6 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 16, 6, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 17, 18, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (1, 18, 4, 4);
 
-
 -- Data for Pebble Beach
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 1, 4, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 2, 12, 5);
@@ -63,7 +62,6 @@ INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 15, 9, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 16, 5, 4);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 17, 13, 3);
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (2, 18, 17, 5);
-
 
 -- Data for Gisborne Golf Club
 INSERT INTO Holes (course_id, hole_number, hcp, par) VALUES (3, 1, 16, 4);
