@@ -38,13 +38,16 @@ app.get('/api/golf-course', async (req, res) => {
 // Endpoint to get golf course suggestions
 app.get('/api/golf-course-suggestions', async (req, res) => {
     const query = req.query.q;
+    console.log(`Received query: ${query}`); // Log the received query
     try {
         const result = await pool.query(
             `SELECT name FROM GolfCourses WHERE name LIKE $1`,
             [`%${query}%`]
         );
+        console.log(`Query result: ${JSON.stringify(result.rows)}`); // Log the query result
         res.json({ suggestions: result.rows.map(row => row.name) });
     } catch (err) {
+        console.error(`Error: ${err.message}`); // Log the error
         res.status(500).json({ error: err.message });
     }
 });
