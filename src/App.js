@@ -44,9 +44,11 @@ const App = () => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.json();
+                return response.text(); // Change to response.text() to log the response
             })
-            .then(data => {
+            .then(text => {
+                console.log('Response Text:', text);
+                const data = JSON.parse(text); // Parse the text to JSON
                 console.log(data.message);
                 setManualEntry(false);
                 handleSearch(courseData.courseName); // Fetch the newly added course
