@@ -32,6 +32,7 @@ const App = () => {
     };
 
     const handleManualCourseSubmit = (courseData) => {
+        console.log('Submitting course data:', courseData); // Log the course data being submitted
         fetch('https://golfparadjuster-testing.onrender.com/api/add-golf-course', {
             method: 'POST',
             headers: {
@@ -47,12 +48,12 @@ const App = () => {
                 return response.json(); // Change to response.json() to parse the response as JSON
             })
             .then(data => {
-                console.log(data.message);
+                console.log('Response data:', data); // Log the response data
                 setManualEntry(false); // Set manualEntry to false to go back to the scorecard table page
                 handleSearch(courseData.courseName); // Fetch the newly added course
             })
             .catch(error => console.error('Error adding course:', error));
-    };
+        };
 
     return (
         <div className="App">
