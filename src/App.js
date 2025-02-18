@@ -12,7 +12,7 @@ const App = () => {
     const [manualEntry, setManualEntry] = useState(false);
 
     const handleSearch = (courseName) => {
-        fetch(`https://golfparadjuster.onrender.com/api/golf-course?name=${courseName}`)
+        fetch(`https://golfparadjuster-testing.onrender.com/api/golf-course?name=${courseName}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -30,20 +30,22 @@ const App = () => {
             })
             .catch(error => console.error('Error fetching data:', error));
     };
-
-    const handlePar99 = () => {
-        setPar99Applied(true);
-    };
-
+    
     const handleManualCourseSubmit = (courseData) => {
-        fetch('https://golfparadjuster.onrender.com/api/add-golf-course', {
+        fetch('https://golfparadjuster-testing.onrender.com/api/add-golf-course', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(courseData),
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response:', response);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 console.log(data.message);
                 setManualEntry(false);
