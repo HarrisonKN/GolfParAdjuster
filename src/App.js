@@ -30,7 +30,7 @@ const App = () => {
             })
             .catch(error => console.error('Error fetching data:', error));
     };
-    
+
     const handleManualCourseSubmit = (courseData) => {
         fetch('https://golfparadjuster-testing.onrender.com/api/add-golf-course', {
             method: 'POST',
@@ -44,13 +44,11 @@ const App = () => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-                return response.text(); // Change to response.text() to log the response
+                return response.json(); // Change to response.json() to parse the response as JSON
             })
-            .then(text => {
-                console.log('Response Text:', text);
-                const data = JSON.parse(text); // Parse the text to JSON
+            .then(data => {
                 console.log(data.message);
-                setManualEntry(false);
+                setManualEntry(false); // Set manualEntry to false to go back to the scorecard table page
                 handleSearch(courseData.courseName); // Fetch the newly added course
             })
             .catch(error => console.error('Error adding course:', error));
