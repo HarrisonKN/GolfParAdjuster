@@ -8,7 +8,7 @@ import './styles/App.css';
 
 const App = () => {
     const [holes, setHoles] = useState([]);
-    const [par99Applied, setPar99Applied] = useState(false);
+    const [AdjParApplied, setAdjParApplied] = useState(false);
     const [manualEntry, setManualEntry] = useState(false);
 
     const handleSearch = (courseName) => {
@@ -24,7 +24,7 @@ const App = () => {
                     setManualEntry(true);
                 } else {
                     setHoles(data.holes);
-                    setPar99Applied(false); // Reset the Par 99 state on new search
+                    setAdjParApplied(false); // Reset the Par 99 state on new search
                     setManualEntry(false);
                 }
             })
@@ -63,8 +63,8 @@ const App = () => {
                 <ManualCourseForm onSubmit={handleManualCourseSubmit} />
             ) : (
                 <>
-                    <ScorecardTable holes={holes} par99Applied={par99Applied} />
-                    <Options onPar99={handlePar99} />
+                    <ScorecardTable holes={holes} AdjParApplied={AdjParApplied} />
+                    <Options onAdjPar={handleAdjPar} />
                 </>
             )}
         </div>
