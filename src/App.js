@@ -8,7 +8,7 @@ import './styles/App.css';
 
 const App = () => {
     const [holes, setHoles] = useState([]);
-    const [AdjParApplied, setAdjParApplied] = useState(null);
+    const [adjustmentType, setAdjustmentType] = useState(null);
     const [manualEntry, setManualEntry] = useState(false);
 
     const handleSearch = (courseName) => {
@@ -56,7 +56,7 @@ const App = () => {
         };
 
     const handleParAdjustment = (type) => {
-        setAdjParApplied(AdjParApplied === type ? null : type);
+        setAdjustmentType(adjustmentType === type ? null : type);
     };
 
     return (
