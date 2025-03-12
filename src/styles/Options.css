@@ -1,19 +1,22 @@
 /* General styles for the options */
 .options {
-    margin-top: 20px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
 }
 
 .options button {
     padding: 10px 20px;
-    font-size: 16px;
+    margin: 5px;
     cursor: pointer;
 }
 
 .options p {
-    margin-top: 10px;
+    margin: 0;
+    color: #666;
     font-size: 14px;
-    color: #555;
 }
 
 /* Responsive styles for mobile devices */

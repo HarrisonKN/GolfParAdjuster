@@ -67,7 +67,7 @@ const App = () => {
                 <ManualCourseForm onSubmit={handleManualCourseSubmit} />
             ) : (
                 <>
-                    <ScorecardTable holes={holes} AdjParApplied={AdjParApplied} />
+                    <ScorecardTable holes={holes} adjustmentType={adjustmentType} />
                     <Options  
                         onPar99={() => handleParAdjustment('beginner')}
                         onAdvancedPar={() => handleParAdjustment('advanced')}
