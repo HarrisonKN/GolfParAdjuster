@@ -1,7 +1,18 @@
 import React from 'react';
 import '../styles/ScorecardTable.css';
 
-const ScorecardTable = ({ holes = [], par99Applied }) => {
+const getAdjustedPar = (hole, adjustmentType) => {
+    if (adjustmentType === 'par99') {
+        return hole.hcp >= 10 ? hole.par + 1 : hole.par + 2;
+    } else if (adjustmentType === 'advancedPar') {
+        return hole.hcp >= 10 ? hole.par - 1 : hole.par - 2;
+    } else if (adjustmentType === 'all5s') {
+        return 5;
+    }
+    return '';
+}
+
+const ScorecardTable = ({ holes = [], adjustmentType }) => {
     const rowTitles = ["Hole", "HCP", "Par", "Adj Par"];
 
     // Generate an array of hole numbers from 1 to 18
@@ -14,16 +25,7 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
 
     // Calculate the adjusted par values
     const adjustedParValues = holes.map(hole => {
-        if (par99Applied){
-            return hole.hcp >= 10 ? hole.par + 1 : hole.par + 2;
-        }
-        else if (advancedParApplied){
-            return hole.hcp >= 10 ? hole.par - 1 : hole.par - 2;
-        }
-        else if (all5sApplied){
-            return 5;
-        }
-        return '';  
+        adjustmentType ? getAdjustedPar(hole, adjustmentType) : '';
     });
 
     // this is same as other one, need to check into this as to why this is  here

@@ -56,7 +56,7 @@ const App = () => {
         };
 
     const handleParAdjustment = (type) => {
-        setAdjustmentType(adjustmentType === type ? null : type);
+        setAdjParApplied(AdjParApplied === type ? null : type);
     };
 
     return (
