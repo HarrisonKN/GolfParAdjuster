@@ -8,7 +8,7 @@ import './styles/App.css';
 
 const App = () => {
     const [holes, setHoles] = useState([]);
-    const [AdjParApplied, setAdjParApplied] = useState(false);
+    const [AdjParApplied, setAdjParApplied] = useState(null);
     const [manualEntry, setManualEntry] = useState(false);
 
     const handleSearch = (courseName) => {
@@ -55,6 +55,10 @@ const App = () => {
             .catch(error => console.error('Error adding course:', error));
         };
 
+    const handleParAdjustment = (type) => {
+        setAdjustmentType(adjustmentType === type ? null : type);
+    };
+
     return (
         <div className="App">
             <Header />
@@ -64,7 +68,10 @@ const App = () => {
             ) : (
                 <>
                     <ScorecardTable holes={holes} AdjParApplied={AdjParApplied} />
-                    <Options onAdjPar={handleAdjPar} />
+                    <Options  
+                        onPar99={() => handleParAdjustment('beginner')}
+                        onAdvancedPar={() => handleParAdjustment('advanced')}
+                        onAll5={() => handleParAdjustment('all5')}/>
                 </>
             )}
         </div>

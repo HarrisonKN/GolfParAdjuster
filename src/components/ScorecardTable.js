@@ -14,11 +14,21 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
 
     // Calculate the adjusted par values
     const adjustedParValues = holes.map(hole => {
-        return par99Applied
-            ? (hole.hcp >= 10 ? hole.par + 1 : hole.par + 2)
-            : '';
+        if (par99Applied){
+            return hole.hcp >= 10 ? hole.par + 1 : hole.par + 2;
+        }
+        else if (advancedParApplied){
+            return hole.hcp >= 10 ? hole.par - 1 : hole.par - 2;
+        }
+        else if (all5sApplied){
+            return 5;
+        }
+        return '';  
     });
 
+    // this is same as other one, need to check into this as to why this is  here
+    //i think this was done because, the one above does it for the regular values and this 
+    // one does it for the adjusted values
     const sumAdjustedHoles1to9 = adjustedParValues.slice(0, 9).reduce((sum, adjPar) => sum + (adjPar || 0), 0);
     const sumAdjustedHoles10to18 = adjustedParValues.slice(9, 18).reduce((sum, adjPar) => sum + (adjPar || 0), 0);
     const totalAdjustedPar = sumAdjustedHoles1to9 + sumAdjustedHoles10to18;
@@ -28,7 +38,7 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
             <table className="scorecard-table">
                 <thead>
                     <tr>
-                        <th>{rowTitles[0]}</th>
+                        <th>{rowTitles[0]}</th> //Hole
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={holeNumber}>
                                 <th>{holeNumber}</th>
@@ -41,7 +51,7 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{rowTitles[1]}</td>
+                        <td>{rowTitles[1]}</td> //HCP
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={`hcp-${holeNumber}`}>
                                 <td>{holes[index] ? holes[index].hcp : ''}</td>
@@ -52,7 +62,7 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
                         <td>{''}</td>
                     </tr>
                     <tr>
-                        <td>{rowTitles[2]}</td>
+                        <td>{rowTitles[2]}</td> //Par
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={`par-${holeNumber}`}>
                                 <td>{holes[index] ? holes[index].par : ''}</td>
@@ -63,20 +73,26 @@ const ScorecardTable = ({ holes = [], par99Applied }) => {
                         <td>{holes.length > 0 ? totalPar : ''}</td>
                     </tr>
                     <tr>
-                        <td>{rowTitles[3]}</td>
+                        <td>{rowTitles[3]}</td> //Adj Par
                         {holeNumbers.map((holeNumber, index) => {
-                            const adjPar = holes[index] && par99Applied
-                                ? (holes[index].hcp >= 10 ? holes[index].par + 1 : holes[index].par + 2)
-                                : '';
+                            const adjPar = holes[index] && (par99Applied || advancedParApplied || all5sApplied)
+                            if (par99Applied){
+                                holes[index].hcp >= 10 ? holes[index].par + 1 : holes[index].par + 2;
+                            }
+                            else if (advancedParApplied){
+                                holes[index].hcp >= 10 ? holes[index].par - 1 : holes[index].par - 2;
+                            }
+                            else if (all5sApplied){
+                                5;
+                            }
                             return (
                                 <React.Fragment key={`adjpar-${holeNumber}`}>
                                     <td>{adjPar}</td>
-                                    {index === 8 && <td>{par99Applied && holes.length > 0 ? sumAdjustedHoles1to9 : ''}</td>}
-                                </React.Fragment>
+                                    {index === 8 && <td>{(par99Applied || advancedParApplied) && holes.length > 0 ? sumAdjustedHoles1to9 : ''}</td>}                                </React.Fragment>
                             );
                         })}
-                        <td>{par99Applied && holes.length > 9 ? sumAdjustedHoles10to18 : ''}</td>
-                        <td>{par99Applied && holes.length > 0 ? totalAdjustedPar : ''}</td>
+                        <td>{(par99Applied || advancedParApplied || all5sApplied) && holes.length > 9 ? sumAdjustedHoles10to18 : ''}</td>
+                        <td>{(par99Applied || advancedParApplied || all5sApplied) && holes.length > 0 ? totalAdjustedPar : ''}</td>
                     </tr>
                 </tbody>
             </table>
