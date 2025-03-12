@@ -68,10 +68,7 @@ const App = () => {
             ) : (
                 <>
                     <ScorecardTable holes={holes} adjustmentType={adjustmentType} />
-                    <Options  
-                        onPar99={() => handleParAdjustment('beginner')}
-                        onAdvancedPar={() => handleParAdjustment('advanced')}
-                        onAll5={() => handleParAdjustment('all5')}/>
+                    <Options onParAdjustment={handleParAdjustment}/>
                 </>
             )}
         </div>
