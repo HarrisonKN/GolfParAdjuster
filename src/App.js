@@ -6,6 +6,8 @@ import Options from './components/Options';
 import ManualCourseForm from './components/ManualCourseForm';
 import './styles/App.css';
 
+import all5Button from './components/all5Button';
+
 const App = () => {
     const [holes, setHoles] = useState([]);
     const [adjustmentType, setAdjustmentType] = useState(null);
@@ -68,7 +70,7 @@ const App = () => {
             ) : (
                 <>
                     <ScorecardTable holes={holes} adjustmentType={adjustmentType} />
-                    <Options onParAdjustment={handleParAdjustment}/>
+                    <all5Button onParAdjustment={handleParAdjustment}/>
                 </>
             )}
         </div>
