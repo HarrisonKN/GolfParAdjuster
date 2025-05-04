@@ -1,14 +1,14 @@
 import React from 'react';
-import '../styles/Header.css';
+import { Typography, Box } from '@mui/material';
+import GolfCourseIcon from '@mui/icons-material/GolfCourse';
 
-const Header = () => {
-    return (
-        <header className="header">
-            <nav className="navbar">
-                <h1 className="logo">Golf Scorecard</h1>
-            </nav>
-        </header>
-    );
-};
+const Header = () => (
+    <Box display="flex" alignItems="center" gap={2}>
+        <GolfCourseIcon color="primary" fontSize="large" />
+        <Typography variant="h4" fontWeight="bold" color="primary">
+            Golf Par Adjuster
+        </Typography>
+    </Box>
+);
 
 export default Header;

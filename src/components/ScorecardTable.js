@@ -1,104 +1,94 @@
 import React from 'react';
-import '../styles/ScorecardTable.css';
+import {
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography
+} from '@mui/material';
 
 const getAdjustedPar = (hole, adjustmentType) => {
-    if (adjustmentType === 'par99') {
-        return hole.hcp >= 10 ? hole.par + 1 : hole.par + 2;
-    } else if (adjustmentType === 'advancedPar') {
-        return hole.hcp >= 10 ? hole.par - 1 : hole.par - 2;
-    } else if (adjustmentType === 'all5s') {
-        return 5;
+    if (!hole) return '';
+    switch (adjustmentType) {
+        case 'beginner':
+            return hole.hcp >= 10 ? hole.par + 1 : hole.par + 2;
+        case 'advanced':
+            return hole.hcp >= 10 ? hole.par - 1 : hole.par - 2;
+        case 'all5':
+            return 5;
+        default:
+            return '';
     }
-    return '';
-}
+};
 
 const ScorecardTable = ({ holes = [], adjustmentType }) => {
     const rowTitles = ["Hole", "HCP", "Par", "Adj Par"];
-
-    // Generate an array of hole numbers from 1 to 18
     const holeNumbers = Array.from({ length: 18 }, (_, i) => i + 1);
 
-    // Calculate the sum of holes 1-9 and 10-18
-    const sumHoles1to9 = holes.slice(0, 9).reduce((sum, hole) => sum + hole.par, 0);
-    const sumHoles10to18 = holes.slice(9, 18).reduce((sum, hole) => sum + hole.par, 0);
+    const sumHoles1to9 = holes.slice(0, 9).reduce((sum, hole) => sum + (hole?.par || 0), 0);
+    const sumHoles10to18 = holes.slice(9, 18).reduce((sum, hole) => sum + (hole?.par || 0), 0);
     const totalPar = sumHoles1to9 + sumHoles10to18;
 
-    // Calculate the adjusted par values
-    const adjustedParValues = holes.map(hole => {
-        adjustmentType ? getAdjustedPar(hole, adjustmentType) : '';
-    });
-
-    // this is same as other one, need to check into this as to why this is  here
-    //i think this was done because, the one above does it for the regular values and this 
-    // one does it for the adjusted values
+    const adjustedParValues = holes.map(hole => getAdjustedPar(hole, adjustmentType));
     const sumAdjustedHoles1to9 = adjustedParValues.slice(0, 9).reduce((sum, adjPar) => sum + (adjPar || 0), 0);
     const sumAdjustedHoles10to18 = adjustedParValues.slice(9, 18).reduce((sum, adjPar) => sum + (adjPar || 0), 0);
     const totalAdjustedPar = sumAdjustedHoles1to9 + sumAdjustedHoles10to18;
 
     return (
-        <div className="table-container">
-            <table className="scorecard-table">
-                <thead>
-                    <tr>
-                        <th>{rowTitles[0]}</th> //Hole
+        <TableContainer component={Paper} sx={{ borderRadius: 3, boxShadow: 2 }}>
+            <Typography variant="h6" sx={{ p: 2, fontWeight: 'bold', color: 'primary.main' }}>
+                Scorecard
+            </Typography>
+            <Table size="small">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>{rowTitles[0]}</TableCell>
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={holeNumber}>
-                                <th>{holeNumber}</th>
-                                {index === 8 && <th>Out</th>}
+                                <TableCell align="center">{holeNumber}</TableCell>
+                                {index === 8 && <TableCell align="center">Out</TableCell>}
                             </React.Fragment>
                         ))}
-                        <th>In</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{rowTitles[1]}</td> //HCP
+                        <TableCell align="center">In</TableCell>
+                        <TableCell align="center">Total</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        <TableCell>{rowTitles[1]}</TableCell>
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={`hcp-${holeNumber}`}>
-                                <td>{holes[index] ? holes[index].hcp : ''}</td>
-                                {index === 8 && <td>{''}</td>}
+                                <TableCell align="center">{holes[index]?.hcp ?? ''}</TableCell>
+                                {index === 8 && <TableCell align="center"></TableCell>}
                             </React.Fragment>
                         ))}
-                        <td>{''}</td>
-                        <td>{''}</td>
-                    </tr>
-                    <tr>
-                        <td>{rowTitles[2]}</td> //Par
+                        <TableCell align="center"></TableCell>
+                        <TableCell align="center"></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>{rowTitles[2]}</TableCell>
                         {holeNumbers.map((holeNumber, index) => (
                             <React.Fragment key={`par-${holeNumber}`}>
-                                <td>{holes[index] ? holes[index].par : ''}</td>
-                                {index === 8 && <td>{holes.length > 0 ? sumHoles1to9 : ''}</td>}
+                                <TableCell align="center">{holes[index]?.par ?? ''}</TableCell>
+                                {index === 8 && <TableCell align="center">{holes.length > 0 ? sumHoles1to9 : ''}</TableCell>}
                             </React.Fragment>
                         ))}
-                        <td>{holes.length > 9 ? sumHoles10to18 : ''}</td>
-                        <td>{holes.length > 0 ? totalPar : ''}</td>
-                    </tr>
-                    <tr>
-                        <td>{rowTitles[3]}</td> //Adj Par
+                        <TableCell align="center">{holes.length > 9 ? sumHoles10to18 : ''}</TableCell>
+                        <TableCell align="center">{holes.length > 0 ? totalPar : ''}</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>{rowTitles[3]}</TableCell>
                         {holeNumbers.map((holeNumber, index) => {
-                            const adjPar = holes[index] && (par99Applied || advancedParApplied || all5sApplied)
-                            if (par99Applied){
-                                holes[index].hcp >= 10 ? holes[index].par + 1 : holes[index].par + 2;
-                            }
-                            else if (advancedParApplied){
-                                holes[index].hcp >= 10 ? holes[index].par - 1 : holes[index].par - 2;
-                            }
-                            else if (all5sApplied){
-                                5;
-                            }
+                            const adjPar = adjustedParValues[index] !== '' ? adjustedParValues[index] : '';
                             return (
                                 <React.Fragment key={`adjpar-${holeNumber}`}>
-                                    <td>{adjPar}</td>
-                                    {index === 8 && <td>{(par99Applied || advancedParApplied) && holes.length > 0 ? sumAdjustedHoles1to9 : ''}</td>}                                </React.Fragment>
+                                    <TableCell align="center">{adjPar}</TableCell>
+                                    {index === 8 && <TableCell align="center">{adjustmentType && holes.length > 0 ? sumAdjustedHoles1to9 : ''}</TableCell>}
+                                </React.Fragment>
                             );
                         })}
-                        <td>{(par99Applied || advancedParApplied || all5sApplied) && holes.length > 9 ? sumAdjustedHoles10to18 : ''}</td>
-                        <td>{(par99Applied || advancedParApplied || all5sApplied) && holes.length > 0 ? totalAdjustedPar : ''}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                        <TableCell align="center">{adjustmentType && holes.length > 9 ? sumAdjustedHoles10to18 : ''}</TableCell>
+                        <TableCell align="center">{adjustmentType && holes.length > 0 ? totalAdjustedPar : ''}</TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 };
 

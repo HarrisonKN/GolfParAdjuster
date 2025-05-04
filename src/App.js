@@ -1,12 +1,24 @@
 import React, { useState } from 'react';
+import { Container, Paper, Box, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import Header from './components/Header';
 import SearchBar from './components/SearchBar';
 import ScorecardTable from './components/ScorecardTable';
 import Options from './components/Options';
 import ManualCourseForm from './components/ManualCourseForm';
-import './styles/App.css';
 
 import all5Button from './components/all5Button';
+
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: { main: '#1976d2' },
+        secondary: { main: '#43a047' },
+        background: { default: '#f5f7fa' },
+    },
+    typography: {
+        fontFamily: 'Inter, Roboto, Arial, sans-serif',
+    },
+});
 
 const App = () => {
     const [holes, setHoles] = useState([]);
@@ -62,18 +74,23 @@ const App = () => {
     };
 
     return (
-        <div className="App">
-            <Header />
-            <SearchBar onSearch={handleSearch} />
-            {manualEntry ? (
-                <ManualCourseForm onSubmit={handleManualCourseSubmit} />
-            ) : (
-                <>
-                    <ScorecardTable holes={holes} adjustmentType={adjustmentType} />
-                    <all5Button onParAdjustment={handleParAdjustment}/>
-                </>
-            )}
-        </div>
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Container maxWidth="md" sx={{ py: 4 }}>
+                <Paper elevation={4} sx={{ borderRadius: 4, p: { xs: 2, sm: 4 }, background: '#fff' }}>
+                    <Box sx={{ mb: 3 }}>
+                        <Header />
+                    </Box>
+                    <Box sx={{ mb: 3 }}>
+                        <SearchBar onSearch={handleSearch} />
+                    </Box>
+                    <Box sx={{ mb: 3 }}>
+                        <ScorecardTable holes={holes} adjustmentType={adjustmentType} />
+                    </Box>
+                    <Options onParAdjustment={handleParAdjustment} />
+                </Paper>
+            </Container>
+        </ThemeProvider>
     );
 };
 
