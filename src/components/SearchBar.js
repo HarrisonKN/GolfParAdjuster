@@ -15,7 +15,7 @@ const SearchBar = ({ onSearch }) => {
             const { data, error } = await supabase
                 .from('GolfCourses')
                 .select('name')
-                .ilike('name', `%${value}%`); // Case-insensitive substring search
+                .ilike('name', `%${query}%`); // Case-insensitive substring search
 
             if (error) {
                 console.error('Error fetching suggestions:', error);
@@ -51,7 +51,7 @@ const SearchBar = ({ onSearch }) => {
                 />
                 <button type="submit">Search</button>
             </form>
-            {suggestions.length > 0 && (
+            {suggestions?.length > 0 && (
                 <ul className="suggestions">
                     {suggestions.map((suggestion, index) => (
                         <li key={index} onClick={() => handleSelect(suggestion)}>
