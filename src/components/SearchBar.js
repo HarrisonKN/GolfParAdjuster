@@ -1,19 +1,28 @@
 import React, { useState } from 'react';
-import '../styles/SearchBar.css';
+import { supabase } from '../supabaseClient.js';
+import { Box, TextField, Button } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = ({ onSearch }) => {
     const [query, setQuery] = useState('');
     const [suggestions, setSuggestions] = useState([]);
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
         const value = e.target.value;
         setQuery(value);
-
+    
         if (value.length > 1) {
-            fetch(`https://golfparadjuster.onrender.com/api/golf-course-suggestions?q=${value}`)
-                .then(response => response.json())
-                .then(data => setSuggestions(data.suggestions))
-                .catch(error => console.error('Error fetching suggestions:', error));
+            const { data, error } = await supabase
+                .from('GolfCourses')
+                .select('name')
+                .ilike('name', `%${value}%`);
+    
+            if (error) {
+                console.error('Error fetching suggestions:', error);
+                setSuggestions([]);
+            } else {
+                setSuggestions(data.map(course => course.name));
+            }
         } else {
             setSuggestions([]);
         }
@@ -41,7 +50,7 @@ const SearchBar = ({ onSearch }) => {
                 />
                 <button type="submit">Search</button>
             </form>
-            {suggestions.length > 0 && (
+            {suggestions?.length > 0 && (
                 <ul className="suggestions">
                     {suggestions.map((suggestion, index) => (
                         <li key={index} onClick={() => handleSelect(suggestion)}>
