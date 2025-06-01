@@ -27,22 +27,30 @@ const App = () => {
     const [manualEntry, setManualEntry] = useState(false);
 
     const handleSearch = async (courseName) => {
-        const { data, error } = await supabase
-            .from('courses')
-            .select('holes')
-            .eq('courseName', courseName)
+        // Get the course by name
+        const { data: courseData, error: courseError } = await supabase
+            .from('GolfCourses')
+            .select('id')
+            .eq('name', courseName)
             .single();
-
-        if (error) {
-            console.error('Error fetching course:', error);
+    
+        if (courseError || !courseData) {
+            console.error('Error fetching course:', courseError);
             setManualEntry(true);
             return;
         }
-
-        if (!data || !data.holes || data.holes.length === 0) {
+    
+        // Get holes for the course
+        const { data: holesData, error: holesError } = await supabase
+            .from('Holes')
+            .select('hole_number, hcp, par')
+            .eq('course_id', courseData.id)
+            .order('hole_number', { ascending: true });
+    
+        if (holesError || !holesData || holesData.length === 0) {
             setManualEntry(true);
         } else {
-            setHoles(data.holes);
+            setHoles(holesData);
             setManualEntry(false);
         }
     };
@@ -68,15 +76,37 @@ const App = () => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Container maxWidth="md" sx={{ py: 4 }}>
-                <Paper elevation={4} sx={{ borderRadius: 4, p: { xs: 2, sm: 4 }, background: '#fff' }}>
+                <Container
+                maxWidth={false}
+                disableGutters
+                sx={{
+                    width: '90vw',
+                    px: 0,
+                    py: 0,
+                    display: 'flex',
+                    alignItems: 'stretch',
+                    justifyContent: 'stretch',
+                    background: theme.palette.background.default,
+                }}
+            >
+                <Paper
+                    elevation={4}
+                    sx={{
+                        borderRadius: 0,
+                        width: '100vw',
+                        p: { xs: 2, sm: 4 },
+                        background: '#fff',
+                        display: 'flex',
+                        flexDirection: 'column',
+                    }}
+                >
                     <Box sx={{ mb: 3 }}>
                         <Header />
                     </Box>
                     <Box sx={{ mb: 3 }}>
                         <SearchBar onSearch={handleSearch} />
                     </Box>
-                    <Box sx={{ mb: 3 }}>
+                    <Box sx={{ mb: 3, flex: 1 }}>
                         {manualEntry ? (
                             <ManualCourseForm onSubmit={handleManualCourseSubmit} />
                         ) : (

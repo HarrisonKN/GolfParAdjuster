@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from './supabaseClient';
+import { supabase } from '../supabaseClient.js';
 import { Box, TextField, Button } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 
@@ -10,18 +10,17 @@ const SearchBar = ({ onSearch }) => {
     const handleChange = async (e) => {
         const value = e.target.value;
         setQuery(value);
-
+    
         if (value.length > 1) {
             const { data, error } = await supabase
                 .from('GolfCourses')
                 .select('name')
-                .ilike('name', `%${value}%`); // Case-insensitive substring search
-
+                .ilike('name', `%${value}%`);
+    
             if (error) {
                 console.error('Error fetching suggestions:', error);
                 setSuggestions([]);
             } else {
-                // Extract names from returned objects
                 setSuggestions(data.map(course => course.name));
             }
         } else {
